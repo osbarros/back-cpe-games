@@ -2,6 +2,7 @@ const express = require("express");
 const routes = express.Router();
 
 const JogoController = require("./controllers/JogoController");
+const JogoValidator = require("./validators/JogoValidator");
 
 // Jogo
 routes.get("/jogo/:jogo_id", JogoController.getById);
