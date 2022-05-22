@@ -5,9 +5,9 @@ const JogoController = require("./controllers/JogoController");
 const JogoValidator = require("./validators/JogoValidator");
 
 // Jogo
-routes.get("/jogo/:jogo_id", JogoController.getById);
-routes.post("/jogo", JogoController.create);
-routes.put("/jogo/:jogo_id", JogoController.update);
-routes.delete("/jogo/:jogo_id", JogoController.delete);
+routes.post("/jogo", JogoValidator.create, JogoController.create);
+routes.get("/jogo/:jogo_id", JogoValidator.getById, JogoController.getById);
+routes.put("/jogo/:jogo_id", JogoValidator.update, JogoController.update);
+routes.delete("/jogo/:jogo_id", JogoValidator.delete, JogoController.delete);
 
 module.exports = routes;
