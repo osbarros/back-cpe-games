@@ -31,7 +31,10 @@ module.exports = {
     try {
       const { user_id } = request.params;
       const newUser = request.body;
-      await UserModel.updateById(user_id, newUser);
+      const result = await UserModel.updateById(user_id, newUser);
+
+      if (result === 0)
+        return response.status(400).json({ notification: "user_id not found"});
 
       return response.status(200).json({notification: "User updated succesfully."});
     } catch (error) {
@@ -44,8 +47,11 @@ module.exports = {
   async delete(request, response) {
     try {
       const { user_id } = request.params;
+      const result = await UserModel.deleteById(note_id);
 
-      await UserModel.deleteById(user_id);
+      if (result === 0)
+        return response.status(400).json({ notification: "user_id not found"});
+
       return response.status(200).json({notification: "User deleted succesfully."});
     } catch (error) {
       console.warn("User delete failed: ", error);
