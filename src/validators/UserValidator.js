@@ -4,7 +4,6 @@ module.exports = {
   
   create: celebrate({
     [Segments.BODY]: Joi.object().keys({
-      user_id: Joi.string().required(),
       email: Joi.string().email().required(),
       senha: Joi.string().min(6).required(),
       nome: Joi.string().required(),

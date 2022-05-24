@@ -6,9 +6,9 @@ module.exports = {
       const newUser = request.body;
 
       const result = await UserModel.create(newUser);
-      return response.status(200).json({user_id: result});
+      return response.status(200).json(result);
     } catch (error) {
-      console.warn("User creation failed: ", error);
+      console.warn("User creation failed:", error);
       return response.status(500).json({
         notification: "Internal server error while trying to create User",
       });
@@ -17,7 +17,7 @@ module.exports = {
   async getById(request, response) {
     try {
       const { user_id } = request.params;
-      const result = await User.getById(user_id);
+      const result = await UserModel.getById(user_id);
 
       return response.status(200).json(result);
     } catch (error) {
@@ -36,7 +36,7 @@ module.exports = {
       if (result === 0)
         return response.status(400).json({ notification: "user_id not found"});
 
-      return response.status(200).json({notification: "User updated succesfully."});
+      return response.status(200).json({notification: "User updated successfully."});
     } catch (error) {
       console.warn("User update failed: ", error);
       return response.status(500).json({
@@ -47,12 +47,12 @@ module.exports = {
   async delete(request, response) {
     try {
       const { user_id } = request.params;
-      const result = await UserModel.deleteById(note_id);
+      const result = await UserModel.deleteById(user_id);
 
       if (result === 0)
         return response.status(400).json({ notification: "user_id not found"});
 
-      return response.status(200).json({notification: "User deleted succesfully."});
+      return response.status(200).json({notification: "User deleted successfully."});
     } catch (error) {
       console.warn("User delete failed: ", error);
       return response.status(500).json({
