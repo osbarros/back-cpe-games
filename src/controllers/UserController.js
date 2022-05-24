@@ -1,18 +1,16 @@
 const UserModel = require("../models/UserModel");
-const Firebase = require("../utils/Firebase");
 const firebase = require("../utils/Firebase");
 
 module.exports = {
   async create(request, response) {
-    try {
+    try{
       const newUser = request.body;
-
-      const uid = Firebase.createNewUser(newUser.email, newUser.password);
+      const uid = await firebase.createNewUser(newUser.email, newUser.senha);
 
       delete newUser.senha;
       newUser.firebase_id = uid;
-
       const result = await UserModel.create(newUser);
+
       return response.status(200).json(result);
     } catch (error) {
       console.warn("User creation failed:", error);
@@ -32,6 +30,7 @@ module.exports = {
       return response.status(500).json({
         notification: "Internal server error while trying to get User",
       });
+      
     }
   },
   async update(request, response) {
