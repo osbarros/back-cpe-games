@@ -11,6 +11,7 @@ exports.up = function(knex) {
       table.string('nome_usuario').notNullable();
       table.string('pais').notNullable();
       table.string('descricao').notNullable();
+      table.string("firebase_id").notNullable();
   });
 };
 
