@@ -1,6 +1,8 @@
 const express = require("express");
 const routes = express.Router();
 
+const auth = require("./Middlewares/authentication");
+
 const JogoController = require("./controllers/JogoController");
 const JogoValidator = require("./validators/JogoValidator");
 
@@ -24,10 +26,10 @@ routes.put("/jogo/:jogo_id", JogoValidator.updateById, JogoController.update);
 routes.delete("/jogo/:jogo_id", JogoValidator.deleteById, JogoController.delete);
 
 // User
-routes.post('/user', UserValidator.create, UserController.create);
-routes.get('/user/:user_id', UserValidator.getById, UserController.getById);
-routes.put('/user/:user_id', UserValidator.update, UserController.update);
-routes.delete('/user/:user_id', UserValidator.delete, UserController.delete);
+routes.post('/user', UserValidator.create, auth.authenticateToken, UserController.create);
+routes.get('/user/:user_id', UserValidator.getById, auth.authenticateToken, UserController.getById);
+routes.put('/user/:user_id', UserValidator.update, auth.authenticateToken, UserController.update);
+routes.delete('/user/:user_id', UserValidator.delete, auth.authenticateToken, UserController.delete);
 
 // Relacao
 routes.post("/relacao", RelacaoValidator.create, RelacaoController.create);
