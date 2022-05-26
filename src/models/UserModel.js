@@ -12,7 +12,7 @@ module.exports = {
     },
     
     async getById( user_id ){
-        const result = await connection("user").where({ user_id }).select("*").first();
+        const result = await connection("user").where({ user_id }).select("*");
         return result;
     },
 
@@ -25,4 +25,9 @@ module.exports = {
         const result = await connection("user").where({ user_id }).delete();
         return result;
     },
+
+    async getByFields(fields) {
+        const result = await connection("user").where(fields).select("*").first();
+        return result;
+    }
 };

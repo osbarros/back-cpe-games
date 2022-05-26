@@ -10,6 +10,13 @@ const UserValidator = require ("./validators/UserValidator");
 const RelacaoController = require("./controllers/RelacaoController");
 const RelacaoValidator = require ("./validators/RelacaoValidator");
 
+const SessionController = require("./controllers/SessionController");
+
+
+//Session
+routes.post("/login", SessionController.signIn);
+
+
 // Jogo
 routes.post("/jogo", JogoValidator.create, JogoController.create);
 routes.get("/jogo/:jogo_id", JogoValidator.getById, JogoController.getById);

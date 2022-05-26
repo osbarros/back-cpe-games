@@ -22,6 +22,16 @@ module.exports = {
     }),
   }),
 
+  getByFirebaseId: celebrate({
+    [Segments.PARAMS]: Joi.object().keys({
+      firebase_id: Joi.string().required(),
+    }),
+    [Segments.QUERY]: Joi.object().keys({
+      firebase_id: Joi.string().optional(),
+    }),
+
+  }),
+
   update: celebrate({
     [Segments.PARAMS]: Joi.object().keys({
       user_id: Joi.string().required(),
