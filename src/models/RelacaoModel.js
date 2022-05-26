@@ -12,7 +12,7 @@ module.exports = {
     },
 
     async getById(user_id) {
-        const result = await connection("usuario").where({user_id}).select("*");
+        const result = await connection("relacao").where({user_id}).select("*");
 
         return result;
     },
