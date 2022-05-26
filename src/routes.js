@@ -26,15 +26,15 @@ routes.put("/jogo/:jogo_id", JogoValidator.updateById, JogoController.update);
 routes.delete("/jogo/:jogo_id", JogoValidator.deleteById, JogoController.delete);
 
 // User
-routes.post('/user', UserValidator.create, auth.authenticateToken, UserController.create);
+routes.post('/user', UserValidator.create, UserController.create);
 routes.get('/user/:user_id', UserValidator.getById, auth.authenticateToken, UserController.getById);
 routes.put('/user/:user_id', UserValidator.update, auth.authenticateToken, UserController.update);
 routes.delete('/user/:user_id', UserValidator.delete, auth.authenticateToken, UserController.delete);
 
 // Relacao
-routes.post("/relacao", RelacaoValidator.create, RelacaoController.create);
-routes.get("/relacao/:user_id", RelacaoValidator.getById, RelacaoController.getById);
-routes.put("/relacao/:relacao_id", RelacaoValidator.updateById, RelacaoController.update);
-routes.delete("/relacao/:relacao_id", RelacaoValidator.deleteById, RelacaoController.delete);
+routes.post("/relacao", RelacaoValidator.create, auth.authenticateToken, RelacaoController.create);
+routes.get("/relacao/:user_id", RelacaoValidator.getById, auth.authenticateToken, RelacaoController.getById);
+routes.put("/relacao/:relacao_id", RelacaoValidator.updateById, auth.authenticateToken, RelacaoController.update);
+routes.delete("/relacao/:relacao_id", RelacaoValidator.deleteById, auth.authenticateToken, RelacaoController.delete);
 
 module.exports = routes;

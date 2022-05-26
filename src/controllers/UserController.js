@@ -1,4 +1,3 @@
-const { getByFirebaseId } = require("../models/UserModel");
 const UserModel = require("../models/UserModel");
 const firebase = require("../utils/Firebase");
 
@@ -35,16 +34,16 @@ module.exports = {
     }
   },
 
-  async getByFirebaseId(request, response) {
+  async getByFields(request, response) {
     try {
-      const { firebase_id } = request.params;
-      const result = await UserModel.getByFirebaseId(firebase_id);
+      const fields = request.params;
+      const result = await UserModel.getByFields(fields);
 
       return response.status(200).json(result);
     } catch (error) {
-      console.warn("User getByFirebaseId failed: ", error);
+      console.warn("User getByFields failed: ", error);
       return response.status(500).json({
-        notification: "Internal server error while trying to get User",
+        notification: "Internal server error while trying to get fields",
       });
       
     }

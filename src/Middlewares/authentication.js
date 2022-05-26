@@ -1,17 +1,17 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 
 module.exports = {
     async authenticateToken(request, response, next) {
-        const authHeader = request.headers['authorization']
+        const authHeader = request.headers.authorization;
         const [scheme, token] = authHeader
         ? authHeader.split(" ")
         : [undefined, undefined];
 
-        if (token === null) 
+        if (!token || token === null) 
             return response.status(401).json({ error: 'No token provided' });
 
         if (!/^Bearer$/i.test(scheme))
-            return response.status(401).json({ error: 'Token badformatted' });
+            return response.status(401).json({ error: 'Token bad formatted' });
 
         const validToken = await new Promise((res) => {   
             jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, data) => {
@@ -22,5 +22,8 @@ module.exports = {
                 return res(true);
             });
         });
+
+        if(validToken) return next();
+        return response.status(403).json({ error: "invalid authorization token "});
     }
 }
