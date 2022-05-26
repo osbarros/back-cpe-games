@@ -4,6 +4,7 @@
  */
 exports.up = function(knex) {
   return knex.schema.createTable("relacao", function (table) {
+      table.uuid("relacao_id").primary().notNullable();
       table.uuid("jogo_id").notNullable();
       table.foreign("jogo_id").references("jogo_id").inTable("jogo");
       table.uuid("user_id").notNullable();
