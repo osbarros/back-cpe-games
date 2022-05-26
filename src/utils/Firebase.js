@@ -28,6 +28,6 @@ module.exports = {
           .auth()
           .signInWithEmailAndPassword(email, password);  //login com o usuario ja cadastrado no sistema
 
-        return result.user.id; // user id
+        return result.user.uid; // user id
     },
 };
